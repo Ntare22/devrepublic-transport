@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     bus_no: DataTypes.STRING,
   }, {});
-  Users.associate = function(models) {
-    // associations can be defined here
-  };
+  // Users.associate = function(models) {
+  //   // associations can be defined here
+  // };
   return Users;
 };
