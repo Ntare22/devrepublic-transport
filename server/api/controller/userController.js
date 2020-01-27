@@ -22,8 +22,8 @@ class UserController {
       }, { attributes: ['user_id', 'first_name', 'last_name', 'email'] });
 
       if (existingEmail) {
-        return res.status(500).json({
-          status: 500,
+        return res.status(409).json({
+          status: 409,
           message: 'Email already exits',
         });
       }
