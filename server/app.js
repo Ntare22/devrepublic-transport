@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import authRouter from './api/routes/authRoutes';
+import tripRouter from './api/routes/tripRoute';
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ app.get('/', (req, res) => res.status(200).json({
 }));
 
 app.use('/api/auth', authRouter);
-
+app.use('/api/', tripRouter);
 app.listen(port, () => `Server is running on PORT ${port}`);
 
 export default app;

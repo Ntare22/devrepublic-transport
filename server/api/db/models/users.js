@@ -8,8 +8,14 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     bus_no: DataTypes.STRING,
   }, {});
-  // Users.associate = function(models) {
-  //   // associations can be defined here
-  // };
+  Users.associate = (models) => {
+    // associations can be defined here
+    Users.hasMany(models.Trip,{
+      foreignKey: 'userId',
+      as: 'owner',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
+    })
+  };
   return Users;
 };
