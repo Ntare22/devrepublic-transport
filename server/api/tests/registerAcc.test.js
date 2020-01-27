@@ -38,11 +38,6 @@ let data = [{
 }];
 
 describe('1. POST register an account ', () => {
-  // beforeEach(async () => {
-  //   Object.values(sequelize.models).map((models) => {
-  //     return models.destroy({ truncate: true });
-  //   })
-  // })
 
   it('should return user has been created', (done) => {
     chai

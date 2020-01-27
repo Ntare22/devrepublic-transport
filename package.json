@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "nodemon --exec babel-node ./server/app.js",
     "start": "npm run build && node ./dist/app.js",
-    "test": "nyc --require @babel/register  mocha ./server/api/tests/*.js --timeout 20000 --exit",
+    "test": "npm run db:reset && npm run test:unit",
+    "test:unit":"NODE_ENV=test nyc --require @babel/register  mocha ./server/api/tests/*.js --timeout 20000 --exit",
     "build": "babel server -d dist",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "db:migrate":"./node_modules/.bin/sequelize db:migrate",
+    "db:reset":"./node_modules/.bin/sequelize db:migrate:undo:all --env test && npm run db:migrate -- --env test",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
     "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
