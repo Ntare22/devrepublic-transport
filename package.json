@@ -14,7 +14,7 @@
     "db:reset": "./node_modules/.bin/sequelize db:migrate:undo:all --env test && npm run db:migrate -- --env test",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
+    "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
   "files": [
     "dist/app.js"
