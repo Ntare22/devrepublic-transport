@@ -1,9 +1,9 @@
 import chai from 'chai';
-import chatHttp from 'chai-http';
+import chaiHttp from 'chai-http';
 import 'chai/register-should';
 import app from '../../app';
 
-chai.use(chatHttp);
+chai.use(chaiHttp);
 
 describe('App tests', () => {
   it('should display a welcome message', (done) => {
