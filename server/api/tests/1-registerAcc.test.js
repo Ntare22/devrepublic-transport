@@ -1,44 +1,42 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
-import models, { sequelize } from '../db/models';
 
 chai.use(chaiHttp);
 chai.should();
-let data = [{
+const data = [{
   firstName: 'Jim',
   lastName: 'Ntare',
   email: 'addas@gmail.com',
   password: 'Ntare1234',
-  status: 'passenger'
+  status: 'passenger',
 }, {
   firstName: '',
   lastName: 'Ntare',
   email: 'addas@gmail.com',
   password: 'Ntare1234',
-  status: 'passenger'
+  status: 'passenger',
 }, {
   firstName: 'Jim',
   lastName: '',
   email: 'addas@gmail.com',
   password: 'Ntare1234',
-  status: 'passenger'
+  status: 'passenger',
 }, {
   firstName: 'Jim',
   lastName: 'Ntare',
   email: '',
   password: 'Ntare1234',
-  status: 'passenger'
+  status: 'passenger',
 }, {
   firstName: 'Jim',
   lastName: 'Ntare',
   email: 'addas@gmail.com',
   password: 'N',
-  status: 'passenger'
+  status: 'passenger',
 }];
 
 describe('1. POST register an account ', () => {
-
   it('should return user has been created', (done) => {
     chai
       .request(app)
@@ -100,5 +98,3 @@ describe('1. POST register an account ', () => {
       });
   });
 });
-
-

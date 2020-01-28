@@ -4,8 +4,16 @@ module.exports = {
     id: {
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
       type: Sequelize.INTEGER,
+    },
+    user_id: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
+    tripId: {
+      allowNull: false,
+      primaryKey: true,
+      type: Sequelize.STRING,
     },
     location: {
       type: Sequelize.STRING,

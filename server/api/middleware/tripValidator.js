@@ -5,7 +5,7 @@ const validateTrip = (req, res, next) => {
     destination: Joi.string().max(7).required().trim()
       .valid('Remera', 'Kimironko'),
     location: Joi.string().trim().max(7).required()
-      .valid('stadium', 'chez-lando'),
+      .valid('stadium', 'gisimenti'),
   };
 
   const validate = Joi.validate(req.body, schema);
