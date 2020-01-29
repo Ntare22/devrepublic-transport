@@ -7,4 +7,6 @@ const tripRouter = express.Router();
 
 tripRouter.post('/trip', authCheck, validateTrip, TripController.createTrip);
 
+tripRouter.get('/specificTrip', TripController.viewTrip);
+
 export default tripRouter;

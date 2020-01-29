@@ -91,3 +91,22 @@ describe('2. POST login into an account ', () => {
       });
   });
 });
+
+describe('View Specific Trip ', () => {
+  it('should return the trip created', (done) => {
+    chai
+      .request(app)
+      .get('/api/specificTrip')
+      .set('token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.a('object');
+        res.body.should.have
+          .property('message')
+          .eql(
+            'Success',
+          );
+        done();
+      });
+  });
+});

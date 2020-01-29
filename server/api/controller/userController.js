@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import { Users } from '../db/models';
 import cipher from '../helpers/cipher';
-import generateToken from '../helpers/generateToken';
+import { generateToken } from '../helpers/generateToken';
 
 
 class UserController {
