@@ -104,7 +104,7 @@ describe('View Specific Trip ', () => {
         res.body.should.have
           .property('message')
           .eql(
-            'Success',
+            'Trip Details',
           );
         done();
       });

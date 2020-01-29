@@ -84,10 +84,10 @@ export default class TripController {
           user_id: existingEmail.user_id,
         },
       }, { attributes: ['trip_id', 'user_id', 'location', 'destination', 'bus_no'] });
-
+      delete trip.dataValues['id'];
       return res.status(200).json({
         status: 200,
-        message: 'Success',
+        message: 'Trip Details',
         data: trip,
       });
     } catch (error) {
