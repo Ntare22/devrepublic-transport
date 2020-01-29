@@ -57,17 +57,6 @@ describe('2. POST login into an account ', () => {
         done();
       });
   });
-  it('should return trip has been deleted successfully', (done) => {
-    chai
-      .request(app)
-      .delete(`/api/trip/${tripId}`)
-      .set('token', token)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property('message').eql('Trip deleted successfully');
-        done();
-      });
-  });
   it('should return enter valid  destination ', (done) => {
     chai
       .request(app)
@@ -100,6 +89,53 @@ describe('2. POST login into an account ', () => {
       .end((err, res) => {
         res.should.have.status(401);
         res.body.should.have.property('error').eql('Please enter valid token');
+        done();
+      });
+  });
+});
+
+describe('View Specific Trip ', () => {
+  it('should return the trip created', (done) => {
+    chai
+      .request(app)
+      .get('/api/specificTrip')
+      .set('token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.a('object');
+        res.body.should.have
+          .property('message')
+          .eql(
+            'Trip Details',
+          );
+        done();
+      });
+  });
+
+  it('should return the trip created', (done) => {
+    chai
+      .request(app)
+      .get('/api/specificTrip')
+      .set('token', wrongToken)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.should.be.a('object');
+        res.body.should.have
+          .property('error')
+          .eql(
+            'there is no such user',
+          );
+        done();
+      });
+  });
+  it('should return trip has been deleted successfully', (done) => {
+    chai
+      .request(app)
+      .delete(`/api/trip/${tripId}`)
+      .set('token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message').eql('Trip deleted successfully');
         done();
       });
   });

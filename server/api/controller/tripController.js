@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import { Trip, Users } from '../db/models';
 import Response from '../helpers/responsesHandler';
+import { verifyToken } from '../helpers/generateToken';
 
 export default class TripController {
   static async createTrip(req, res) {
@@ -63,6 +64,7 @@ export default class TripController {
     }
   }
 
+
   static async deleteTrip(req, res) {
     try {
     // console.log('&&&&&*******', req.tripInfo);
@@ -79,6 +81,40 @@ export default class TripController {
       return res.status(500).send({
         status: 500,
         message: 'server error',
+      });
+    }
+  }
+
+  static async viewTrip(req, res) {
+    const email = verifyToken(req, res).userEmail;
+    try {
+      const existingEmail = await Users.findOne({
+        where: {
+          email,
+        },
+      }, { attributes: ['user_id', 'first_name', 'last_name', 'email'] });
+      if (!existingEmail) {
+        return res.status(404).json({
+          status: 404,
+          message: 'There is no such user',
+        });
+      }
+
+      const trip = await Trip.findOne({
+        where: {
+          user_id: existingEmail.user_id,
+        },
+      }, { attributes: ['trip_id', 'user_id', 'location', 'destination', 'bus_no'] });
+      delete trip.dataValues.id;
+      return res.status(200).json({
+        status: 200,
+        message: 'Trip Details',
+        data: trip,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: error.message,
       });
     }
   }
