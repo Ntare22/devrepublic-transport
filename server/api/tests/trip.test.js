@@ -12,6 +12,7 @@ const tripData = [{
   destination: 'kanombe',
   location: 'remera',
 }];
+let tripId;
 const data = [{
   email: 'addas@gmail.com',
   password: 'Ntare1234',
@@ -50,8 +51,20 @@ describe('2. POST login into an account ', () => {
       .send(tripData[0])
       .set('token', token)
       .end((err, res) => {
+        tripId = res.body.data.tripId;
         res.should.have.status(201);
         res.body.should.have.property('message').eql(' Trip created successfully');
+        done();
+      });
+  });
+  it('should return trip has been deleted successfully', (done) => {
+    chai
+      .request(app)
+      .delete(`/api/trip/${tripId}`)
+      .set('token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message').eql('Trip deleted successfully');
         done();
       });
   });

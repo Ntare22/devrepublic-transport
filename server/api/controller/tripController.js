@@ -62,4 +62,24 @@ export default class TripController {
       return res.status(500).json({ error: error.message });
     }
   }
+
+  static async deleteTrip(req, res) {
+    try {
+    // console.log('&&&&&*******', req.tripInfo);
+      await Trip.destroy({
+        where: {
+          tripId: req.tripInfo,
+        },
+      });
+      return res.status(200).send({
+        status: 200,
+        message: 'Trip deleted successfully',
+      });
+    } catch (error) {
+      return res.status(500).send({
+        status: 500,
+        message: 'server error',
+      });
+    }
+  }
 }
