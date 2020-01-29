@@ -14,6 +14,6 @@ app.get('/', (req, res) => res.status(200).json({
 
 app.use('/api/auth', authRouter);
 app.use('/api/', tripRouter);
-app.listen(port, () => console.log(`Server is running on PORT ${port}`));
+app.listen(port, () => `Server is running on PORT ${port}`);
 
 export default app;

@@ -109,4 +109,21 @@ describe('View Specific Trip ', () => {
         done();
       });
   });
+
+  it('should return the trip created', (done) => {
+    chai
+      .request(app)
+      .get('/api/specificTrip')
+      .set('token', wrongToken)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.should.be.a('object');
+        res.body.should.have
+          .property('error')
+          .eql(
+            'there is no such user',
+          );
+        done();
+      });
+  });
 });

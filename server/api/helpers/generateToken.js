@@ -17,7 +17,7 @@ const verifyToken = (req, res) => {
     const { token } = req.headers;
     return jwt.verify(token, process.env.key);
   } catch (error) {
-    return res.status(401).json({ stastu: 401, error: 'there is no such user' });
+    return res.status(401).json({ status: 401, error: 'there is no such user' });
   }
 };
 
