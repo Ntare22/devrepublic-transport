@@ -4,7 +4,7 @@ import app from '../../app';
 
 chai.use(chaiHttp);
 chai.should();
-let data = [{
+const data = [{
   email: 'addas@gmail.com',
   password: 'Ntare1234',
 }, {
@@ -16,7 +16,6 @@ let data = [{
 }];
 
 describe('2. POST login into an account ', () => {
-
   it('should return user is logged in', (done) => {
     chai
       .request(app)
@@ -67,5 +66,4 @@ describe('2. POST login into an account ', () => {
         done();
       });
   });
-
 });

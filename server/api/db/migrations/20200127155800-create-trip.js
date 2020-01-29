@@ -1,31 +1,30 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Trips', {
     id: {
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
       type: Sequelize.INTEGER,
     },
     user_id: {
+      allowNull: false,
       type: Sequelize.STRING,
     },
-    first_name: {
+    tripId: {
+      allowNull: false,
+      primaryKey: true,
       type: Sequelize.STRING,
     },
-    last_name: {
+    location: {
       type: Sequelize.STRING,
     },
-    email: {
+    destination: {
       type: Sequelize.STRING,
     },
-    password: {
+    BusArrivalTime: {
       type: Sequelize.STRING,
     },
-    status: {
-      type: Sequelize.STRING,
-    },
-    bus_no: {
+    busToArrive: {
       type: Sequelize.STRING,
     },
     createdAt: {
@@ -37,5 +36,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface) => queryInterface.dropTable('Users'),
+  down: (queryInterface) => queryInterface.dropTable('Trips'),
 };
