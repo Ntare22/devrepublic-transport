@@ -64,6 +64,27 @@ export default class TripController {
     }
   }
 
+
+  static async deleteTrip(req, res) {
+    try {
+    // console.log('&&&&&*******', req.tripInfo);
+      await Trip.destroy({
+        where: {
+          tripId: req.tripInfo,
+        },
+      });
+      return res.status(200).send({
+        status: 200,
+        message: 'Trip deleted successfully',
+      });
+    } catch (error) {
+      return res.status(500).send({
+        status: 500,
+        message: 'server error',
+      });
+    }
+  }
+
   static async viewTrip(req, res) {
     const email = verifyToken(req, res).userEmail;
     try {
@@ -84,7 +105,7 @@ export default class TripController {
           user_id: existingEmail.user_id,
         },
       }, { attributes: ['trip_id', 'user_id', 'location', 'destination', 'bus_no'] });
-      delete trip.dataValues['id'];
+      delete trip.dataValues.id;
       return res.status(200).json({
         status: 200,
         message: 'Trip Details',
