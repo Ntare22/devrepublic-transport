@@ -9,7 +9,7 @@ const data = [{
   lastName: 'Ntare',
   email: 'addas@gmail.com',
   password: 'Ntare1234',
-  status: 'passenger',
+  status: 'driver',
 }, {
   firstName: '',
   lastName: 'Ntare',
@@ -40,7 +40,7 @@ describe('1. POST register an account ', () => {
   it('should return user has been created', (done) => {
     chai
       .request(app)
-      .post('/api/auth/register')
+      .post('/api/v1/auth/register')
       .send(data[0])
       .end((err, res) => {
         res.should.have.status(201);
@@ -56,7 +56,7 @@ describe('1. POST register an account ', () => {
   it('should return firstname is required', (done) => {
     chai
       .request(app)
-      .post('/api/auth/register')
+      .post('/api/v1/auth/register')
       .send(data[1])
       .end((err, res) => {
         res.should.have.status(400);
@@ -67,7 +67,7 @@ describe('1. POST register an account ', () => {
   it('should return lastname is required', (done) => {
     chai
       .request(app)
-      .post('/api/auth/register')
+      .post('/api/v1/auth/register')
       .send(data[2])
       .end((err, res) => {
         res.should.have.status(400);
@@ -78,7 +78,7 @@ describe('1. POST register an account ', () => {
   it('should return email is required', (done) => {
     chai
       .request(app)
-      .post('/api/auth/register')
+      .post('/api/v1/auth/register')
       .send(data[3])
       .end((err, res) => {
         res.should.have.status(400);
@@ -89,7 +89,7 @@ describe('1. POST register an account ', () => {
   it('should return should be at least 8 characters is required', (done) => {
     chai
       .request(app)
-      .post('/api/auth/register')
+      .post('/api/v1/auth/register')
       .send(data[4])
       .end((err, res) => {
         res.should.have.status(400);

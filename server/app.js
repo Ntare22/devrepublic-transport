@@ -12,8 +12,8 @@ app.get('/', (req, res) => res.status(200).json({
   message: 'Welcome to devRepublic transport',
 }));
 
-app.use('/api/auth', authRouter);
-app.use('/api/', tripRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1', tripRouter);
 app.listen(port, () => `Server is running on PORT ${port}`);
 
 export default app;

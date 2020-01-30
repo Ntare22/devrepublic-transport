@@ -1,6 +1,5 @@
 import uuid from 'uuid';
 import { Trip, Users } from '../db/models';
-import Response from '../helpers/responsesHandler';
 import { verifyToken } from '../helpers/generateToken';
 
 export default class TripController {
@@ -23,7 +22,11 @@ export default class TripController {
         },
       });
       if (tripExist) {
-        return Response.errorResponse(res, 400, 'Trip already exist');
+        return res.status(400).json({
+          status: 400,
+          message: 'Trip already exist',
+        });
+        
       }
       if (location === 'stadium') {
         await Trip.create({
@@ -43,7 +46,12 @@ export default class TripController {
           BusArrivalTime: BusArrivalTime[0],
           busToArrive: busToArrive[0],
         };
-        return Response.sucessResponse(res, 201, ' Trip created successfully', data);
+        return res.status(201).json({
+          status: 200,
+          message: ' Trip created successfully',
+          data
+        });
+      
       }
       if (location === 'gisimenti') {
         const TripDetails = await Trip.create({
@@ -54,7 +62,12 @@ export default class TripController {
           BusArrivalTime: BusArrivalTime[1],
           busToArrive: busToArrive[1],
         });
-        return Response.sucessResponse(res, 201, ' Trip created successfully', TripDetails);
+        return res.status(201).json({
+          status: 200,
+          message: ' Trip created successfully',
+          data: TripDetails
+        });
+       
       }
       return res.status(400).json({
         error: 'Enter valid loaction input ',
@@ -67,7 +80,6 @@ export default class TripController {
 
   static async deleteTrip(req, res) {
     try {
-    // console.log('&&&&&*******', req.tripInfo);
       await Trip.destroy({
         where: {
           tripId: req.tripInfo,
@@ -118,4 +130,28 @@ export default class TripController {
       });
     }
   }
+  static async viewPassenger (req, res){
+    try{
+      if (req.userStatus !== 'driver'){
+        return res.status(401).json({ status: 401,error: 'Only driver are allowed to perform this action'});
+      }
+    const status = 'passenger'
+    const allPassengers = await Users.findAll({
+        where: {
+            status
+        },
+        attributes: ['user_id','first_name', 'last_name','email','status'],
+        raw : true
+
+    });
+    return res.status(200).json({
+      status: 200,
+      message: 'All passengers',
+      data: allPassengers
+    });
+    }
+    catch(error){
+      return res.status(500).json({ error: error.message });
+    }
+    }
 }

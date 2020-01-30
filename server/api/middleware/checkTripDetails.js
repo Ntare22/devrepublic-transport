@@ -1,4 +1,4 @@
-import Response from '../helpers/responsesHandler';
+// import Response from '../helpers/responsesHandler';
 import { Users, Trip } from '../db/models';
 
 export default class TripDetails {
@@ -11,13 +11,17 @@ export default class TripDetails {
     },
     // eslint-disable-next-line function-paren-newline
     );
-    const { user_id } = userIdFromToken;
+    const { user_id, status } = userIdFromToken;
 
 
     if (!user_id) {
-      return Response.errorResponse(res, 404, 'You do not own this trip');
+      return res.status(404).json({
+        status: 404,
+        error: 'You do not own this trip',
+      });
     }
     req.userDetails = user_id;
+    req.userStatus = status;
     return next();
   }
 
@@ -32,11 +36,17 @@ export default class TripDetails {
       attributes: ['user_id, tripId'],
     });
     if (!tripDetails) {
-      return Response.errorResponse(res, 404, 'Trip was not found');
+      return res.status(404).json({
+        status: 404,
+        error: 'Trip was not found',
+      });
     }
-    const compareDetails = tripDetails.user_id === req.userDetails
+    const compareDetails = tripDetails.user_id === req.userDetails;
     if (!compareDetails) {
-      return Response.errorResponse(res, 404, 'Does not belong to you');
+      return res.status(404).json({
+        status: 404,
+        error: 'Does not belong to you',
+      });
     }
     req.tripInfo = tripId;
     return next();
