@@ -19,7 +19,7 @@ describe('2. POST login into an account ', () => {
   it('should return user is logged in', (done) => {
     chai
       .request(app)
-      .post('/api/auth/login')
+      .post('/api/v1/auth/login')
       .send(data[0])
       .end((err, res) => {
         res.should.have.status(200);
@@ -36,7 +36,7 @@ describe('2. POST login into an account ', () => {
   it('should return user email or password is incorrect', (done) => {
     chai
       .request(app)
-      .post('/api/auth/login')
+      .post('/api/v1/auth/login')
       .send(data[1])
       .end((err, res) => {
         res.should.have.status(401);
@@ -53,7 +53,7 @@ describe('2. POST login into an account ', () => {
   it('should return user email or password is incorrect', (done) => {
     chai
       .request(app)
-      .post('/api/auth/login')
+      .post('/api/v1/auth/login')
       .send(data[2])
       .end((err, res) => {
         res.should.have.status(409);
