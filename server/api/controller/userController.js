@@ -67,6 +67,13 @@ class UserController {
         },
       }, { attributes: ['email', 'password'] });
 
+      if (!findEmail) {
+        return res.status(409).json({
+          status: 409,
+          message: 'email or password does not exist',
+        });
+      }
+
       if (cipher.comparePassword(password, findEmail.password)) {
         const userToken = generateToken(email);
         return res.status(200).json({
