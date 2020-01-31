@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Increasing efficiency in the public transportation of people in Rwanda.",
   "main": "index.js",
+  "nyc": {
+    "include": "server",
+    "exclude": [
+      "**/index.js"
+    ]
+  },
   "scripts": {
     "dev": "nodemon --exec babel-node ./server/app.js",
     "start": "npm run build && node ./dist/app.js",

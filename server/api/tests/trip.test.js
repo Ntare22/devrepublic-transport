@@ -11,6 +11,10 @@ const tripData = [{
 {
   destination: 'kanombe',
   location: 'remera',
+},
+{
+  destination: 'Kimironko',
+  location: 'gisimenti',
 }];
 let tripId;
 const data = [{
@@ -96,7 +100,7 @@ describe('TRIPS TESTS', () => {
   it('should return Trip Details', (done) => {
     chai
       .request(app)
-      .get('/api/v1/specificTrip')
+      .get(`/api/v1/trip/${tripId}`)
       .set('token', token)
       .end((err, res) => {
         res.should.have.status(200);
@@ -130,7 +134,7 @@ describe('TRIPS TESTS', () => {
   it('should return there is no such user', (done) => {
     chai
       .request(app)
-      .get('/api/v1/specificTrip')
+      .get(`/api/v1/trip/${tripId}`)
       .set('token', wrongToken)
       .end((err, res) => {
         res.should.have.status(401);
@@ -138,8 +142,21 @@ describe('TRIPS TESTS', () => {
         res.body.should.have
           .property('error')
           .eql(
-            'there is no such user',
+            'Please enter valid token',
           );
+        done();
+      });
+  });
+  it('User should modify a trip', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/trip/${tripId}`)
+      .set('token', token)
+      .send(tripData[2])
+      .end((_err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property('status').eql(201);
+        res.body.should.have.property('message').eql('Trip modified successfully');
+        res.body.should.have.property('trip');
         done();
       });
   });

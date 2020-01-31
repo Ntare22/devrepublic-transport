@@ -12,8 +12,8 @@ const authCheck = (req, res, next) => {
   }
 
   try {
-    const decodePassword = jwt.verify(token, process.env.key);
-    req.payload = decodePassword;
+    const comparePassword = jwt.verify(token, process.env.key);
+    req.payload = comparePassword;
     return next();
   } catch (ex) {
     return res.status(401).json({

@@ -12,13 +12,4 @@ const generateToken = (email) => {
   return token;
 };
 
-const verifyToken = (req, res) => {
-  try {
-    const { token } = req.headers;
-    return jwt.verify(token, process.env.key);
-  } catch (error) {
-    return res.status(401).json({ status: 401, error: 'there is no such user' });
-  }
-};
-
-export { generateToken, verifyToken };
+export default generateToken;

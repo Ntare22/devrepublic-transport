@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import { Users } from '../db/models';
 import cipher from '../helpers/cipher';
-import { generateToken } from '../helpers/generateToken';
+import generateToken from '../helpers/generateToken';
 
 
 class UserController {
@@ -40,7 +40,7 @@ class UserController {
         status,
         bus_no: busNo,
       });
-
+      delete user.dataValues.password;
       return res.status(201).json({
         status: 201,
         message: 'User has been created',
