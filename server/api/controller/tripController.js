@@ -6,8 +6,7 @@ const switcher = (location) => {
   if (location === 'stadium') {
     BusArrivalTime = '30 minutes';
     busToArrive = 'RAC 7';
-  }
-  if (location === 'gisimenti') {
+  } else { // (location === 'gisimenti')
     BusArrivalTime = '20 minutes';
     busToArrive = 'RAC 9';
   }

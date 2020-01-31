@@ -11,6 +11,10 @@ const tripData = [{
 {
   destination: 'kanombe',
   location: 'remera',
+},
+{
+  destination: 'Kimironko',
+  location: 'gisimenti',
 }];
 let tripId;
 const data = [{
@@ -147,7 +151,7 @@ describe('TRIPS TESTS', () => {
     chai.request(app)
       .patch(`/api/v1/trip/${tripId}`)
       .set('token', token)
-      .send(tripData[0])
+      .send(tripData[2])
       .end((_err, res) => {
         res.should.have.status(201);
         res.body.should.have.property('status').eql(201);
