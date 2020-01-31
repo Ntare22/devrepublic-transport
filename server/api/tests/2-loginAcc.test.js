@@ -61,7 +61,7 @@ describe('2. POST login into an account ', () => {
         res.body.should.have
           .property('message')
           .eql(
-            'Email or password does not exist',
+            'email or password does not exist',
           );
         done();
       });
