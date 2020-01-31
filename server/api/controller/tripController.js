@@ -6,7 +6,8 @@ const switcher = (location) => {
   if (location === 'stadium') {
     BusArrivalTime = '30 minutes';
     busToArrive = 'RAC 7';
-  } else { // (location === 'gisimenti')
+  }
+  if (location === 'gisimenti') {
     BusArrivalTime = '20 minutes';
     busToArrive = 'RAC 9';
   }
@@ -22,7 +23,6 @@ export default class TripController {
           email: userEmail,
         },
       }, { attributes: ['user_id'] });
-      // eslint-disable-next-line camelcase
       const { user_id } = userIdFromToken;
       const tripExist = await Trip.findOne({
         where: {
@@ -36,6 +36,7 @@ export default class TripController {
         });
       }
       switcher(location);
+      console.log('......',location)
       await Trip.create({
         user_id,
         tripId,
@@ -45,7 +46,6 @@ export default class TripController {
         busToArrive,
       });
 
-<<<<<<< HEAD
       const data = {
         user_id,
         tripId,
@@ -58,39 +58,6 @@ export default class TripController {
         status: 200,
         message: ' Trip created successfully',
         data,
-=======
-        const data = {
-          user_id,
-          tripId,
-          destination,
-          location,
-          BusArrivalTime: BusArrivalTime[0],
-          busToArrive: busToArrive[0],
-        };
-        return res.status(201).json({
-          status: 200,
-          message: ' Trip created successfully',
-          data,
-        });
-      }
-      if (location === 'gisimenti') {
-        const TripDetails = await Trip.create({
-          user_id,
-          tripId,
-          destination,
-          location,
-          BusArrivalTime: BusArrivalTime[1],
-          busToArrive: busToArrive[1],
-        });
-        return res.status(201).json({
-          status: 200,
-          message: ' Trip created successfully',
-          data: TripDetails,
-        });
-      }
-      return res.status(400).json({
-        error: 'Enter valid loaction input ',
->>>>>>> 7cb03f79efeffd619d65d0e00f9cde0f8440c855
       });
     } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -160,7 +127,6 @@ export default class TripController {
       return res.status(500).json({ error: error.message });
     }
   }
-<<<<<<< HEAD
 
   static async updateTrip(req, res) {
     try {
@@ -185,6 +151,4 @@ export default class TripController {
       return res.status(500).json({ error: error.message });
     }
   }
-=======
->>>>>>> 7cb03f79efeffd619d65d0e00f9cde0f8440c855
 }
