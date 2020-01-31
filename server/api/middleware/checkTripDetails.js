@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // import Response from '../helpers/responsesHandler';
 import { Users, Trip } from '../db/models';
 
@@ -8,9 +9,7 @@ export default class TripDetails {
       where: {
         email: userEmail,
       },
-    },
-    // eslint-disable-next-line function-paren-newline
-    );
+    });
     const { user_id, status } = userIdFromToken;
 
 

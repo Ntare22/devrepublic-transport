@@ -15,6 +15,7 @@ export default class TripController {
           email: userEmail,
         },
       }, { attributes: ['user_id'] });
+      // eslint-disable-next-line camelcase
       const { user_id } = userIdFromToken;
       const tripExist = await Trip.findOne({
         where: {
@@ -26,7 +27,6 @@ export default class TripController {
           status: 400,
           message: 'Trip already exist',
         });
-        
       }
       if (location === 'stadium') {
         await Trip.create({
@@ -49,9 +49,8 @@ export default class TripController {
         return res.status(201).json({
           status: 200,
           message: ' Trip created successfully',
-          data
+          data,
         });
-      
       }
       if (location === 'gisimenti') {
         const TripDetails = await Trip.create({
@@ -65,9 +64,8 @@ export default class TripController {
         return res.status(201).json({
           status: 200,
           message: ' Trip created successfully',
-          data: TripDetails
+          data: TripDetails,
         });
-       
       }
       return res.status(400).json({
         error: 'Enter valid loaction input ',
@@ -130,28 +128,28 @@ export default class TripController {
       });
     }
   }
-  static async viewPassenger (req, res){
-    try{
-      if (req.userStatus !== 'driver'){
-        return res.status(401).json({ status: 401,error: 'Only driver are allowed to perform this action'});
-      }
-    const status = 'passenger'
-    const allPassengers = await Users.findAll({
-        where: {
-            status
-        },
-        attributes: ['user_id','first_name', 'last_name','email','status'],
-        raw : true
 
-    });
-    return res.status(200).json({
-      status: 200,
-      message: 'All passengers',
-      data: allPassengers
-    });
-    }
-    catch(error){
+  static async viewPassenger(req, res) {
+    try {
+      if (req.userStatus !== 'driver') {
+        return res.status(401).json({ status: 401, error: 'Only driver are allowed to perform this action' });
+      }
+      const status = 'passenger';
+      const allPassengers = await Users.findAll({
+        where: {
+          status,
+        },
+        attributes: ['user_id', 'first_name', 'last_name', 'email', 'status'],
+        raw: true,
+
+      });
+      return res.status(200).json({
+        status: 200,
+        message: 'All passengers',
+        data: allPassengers,
+      });
+    } catch (error) {
       return res.status(500).json({ error: error.message });
     }
-    }
+  }
 }
