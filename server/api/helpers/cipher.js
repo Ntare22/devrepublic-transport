@@ -7,7 +7,7 @@ class cipher {
     return bcrypt.hashSync(password, Number(process.env.salt));
   }
 
-  static decodePassword(enteredPwd, hashedPwd) {
+  static comparePassword(enteredPwd, hashedPwd) {
     return bcrypt.compareSync(enteredPwd, hashedPwd);
   }
 }
