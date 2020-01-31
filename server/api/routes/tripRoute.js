@@ -10,6 +10,7 @@ tripRouter.post('/trip', authCheck, validateTrip, TripController.createTrip);
 tripRouter.delete('/trip/:tripId', authCheck, TripDetails.findUserInToken, TripDetails.findTrip, TripController.deleteTrip);
 tripRouter.get('/trip/:tripId', authCheck, TripDetails.findUserInToken, TripDetails.findTrip, TripController.viewTrip);
 tripRouter.patch('/trip/:tripId', authCheck, validateTrip, TripDetails.findUserInToken, TripDetails.findTrip, TripController.updateTrip);
+tripRouter.get('/specificTrip', TripController.viewTrip);
 tripRouter.get('/driver', authCheck, TripDetails.findUserInToken, TripController.viewPassenger);
 
 export default tripRouter;
