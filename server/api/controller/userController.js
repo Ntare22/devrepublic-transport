@@ -13,14 +13,13 @@ class UserController {
         email,
         password,
         status,
-        busNo,
       } = req.body;
-
+      console.log('********', firstName)
       const existingEmail = await Users.findOne({
         where: {
           email,
         },
-      }, { attributes: ['user_id', 'first_name', 'last_name', 'email'] });
+      }, { attributes: ['userId', 'firstName', 'lastName', 'email'] });
 
       if (existingEmail) {
         return res.status(409).json({
@@ -32,17 +31,18 @@ class UserController {
       const userPassword = cipher.hashPassword(password);
 
       const user = await Users.create({
-        user_id: uuid(),
-        first_name: firstName,
-        last_name: lastName,
+        userId: uuid(),
+        firstName,
+        lastName,
         email,
         password: userPassword,
         status,
-        bus_no: busNo,
       });
       delete user.dataValues.password;
+      const userToken = generateToken(email);
       return res.status(201).json({
         status: 201,
+        token: userToken,
         message: 'User has been created',
         data: user,
       });
