@@ -22,11 +22,11 @@ export default class TripController {
         where: {
           email: userEmail,
         },
-      }, { attributes: ['user_id'] });
-      const { user_id } = userIdFromToken;
+      }, { attributes: ['userId'] });
+      const { userId } = userIdFromToken;
       const tripExist = await Trip.findOne({
         where: {
-          user_id,
+          userId,
         },
       });
       if (tripExist) {
@@ -36,9 +36,8 @@ export default class TripController {
         });
       }
       switcher(location);
-      console.log('......',location)
       await Trip.create({
-        user_id,
+        userId,
         tripId,
         destination,
         location,
@@ -47,7 +46,7 @@ export default class TripController {
       });
 
       const data = {
-        user_id,
+        userId,
         tripId,
         destination,
         location,
@@ -114,7 +113,7 @@ export default class TripController {
         where: {
           status,
         },
-        attributes: ['user_id', 'first_name', 'last_name', 'email', 'status'],
+        attributes: ['userId', 'firstName', 'lastName', 'email', 'status'],
         raw: true,
 
       });

@@ -6,7 +6,7 @@ module.exports = {
       autoIncrement: true,
       type: Sequelize.INTEGER,
     },
-    user_id: {
+    userId: {
       allowNull: false,
       type: Sequelize.STRING,
     },

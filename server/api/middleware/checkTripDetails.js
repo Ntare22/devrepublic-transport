@@ -10,16 +10,16 @@ export default class TripDetails {
         email: userEmail,
       },
     });
-    const { user_id, status } = userIdFromToken;
+    const { userId, status } = userIdFromToken;
 
 
-    if (!user_id) {
+    if (!userId) {
       return res.status(404).json({
         status: 404,
         error: 'You do not own this trip',
       });
     }
-    req.userDetails = user_id;
+    req.userDetails = userId;
     req.userStatus = status;
     return next();
   }
@@ -32,7 +32,7 @@ export default class TripDetails {
       },
     },
     {
-      attributes: ['user_id, tripId'],
+      attributes: ['userId, tripId'],
     });
     if (!tripDetails) {
       return res.status(404).json({
@@ -40,7 +40,7 @@ export default class TripDetails {
         error: 'Trip was not found',
       });
     }
-    const compareDetails = tripDetails.user_id === req.userDetails;
+    const compareDetails = tripDetails.userId === req.userDetails;
     if (!compareDetails) {
       return res.status(404).json({
         status: 404,
