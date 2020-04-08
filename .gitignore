@@ -2,3 +2,6 @@ node_modules
 .nyc_output
 .env
 dist
+package-lock.json
+.package-lock.json
+.DS_Store

@@ -1,0 +1,41 @@
+.chatbox{
+    width: 500px;
+    min-width: 390px;
+    height: 600px;
+    padding: 25px;
+    background-color: white;
+    margin: 20px auto;
+    box-shadow: 0 3px #cccccc;
+}
+
+.chatlogs{
+    width: 100%;
+    padding: 10px;
+    height: 470px;
+    background: aliceblue;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+.chat_friend{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.chat_friend > .user_photo {
+    width: 65px;
+    height: 65px;
+    background-color: lightgrey;
+    overflow: hidden;
+}
+.chat_friend > .chat_msg{
+    width: 70%;
+    padding: 15px;
+    margin: 5px 10px 0px;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 18px;
+    background-color: skyblue;
+}

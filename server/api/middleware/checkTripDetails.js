@@ -11,8 +11,7 @@ export default class TripDetails {
       },
     });
     const { userId, status } = userIdFromToken;
-
-
+    // console.log('USER ID', userIdFromToken)
     if (!userId) {
       return res.status(404).json({
         status: 404,

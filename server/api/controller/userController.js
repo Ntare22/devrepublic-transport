@@ -14,7 +14,6 @@ class UserController {
         password,
         status,
       } = req.body;
-      console.log('********', firstName)
       const existingEmail = await Users.findOne({
         where: {
           email,
@@ -65,8 +64,8 @@ class UserController {
         where: {
           email,
         },
-      }, { attributes: ['email', 'password'] });
-
+      }, { attributes: ['email', 'password', 'firstName', 'lastName'] });
+      // console.log('data', findEmail.firstName);
       if (!findEmail) {
         return res.status(409).json({
           status: 409,
@@ -78,8 +77,13 @@ class UserController {
         const userToken = generateToken(email);
         return res.status(200).json({
           status: 200,
-          email,
           message: 'User is logged in',
+          data: {
+            email,
+            firstName: findEmail.firstName,
+            lastName: findEmail.lastName,
+            status: findEmail.status,
+          },
           token: userToken,
         });
       }

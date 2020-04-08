@@ -1,7 +1,8 @@
 const initialState = {
     user: null,
     isAuthenticated: false,
-    error: null
+    error: null,
+    isLoggedIn: false
 }
 
 const auth = (state = initialState, action) => {
@@ -14,6 +15,14 @@ const auth = (state = initialState, action) => {
         return{
             ...state, error: action.payload
         }
+        case 'LOGIN_SUCCESS':
+            return {
+                ...state, user: action.payload, isLoggedIn: true
+            }
+        case 'LOGIN_ERROR': 
+            return{
+                    ...state, error: action.payload
+            }
         default:
             return state
     }

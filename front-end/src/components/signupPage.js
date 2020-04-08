@@ -10,28 +10,32 @@ const SignupComponent = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = async data => {
    const output =  await props.signUp(data);
-    if (output.isAuthenticated){
-      history.push('/dashboard');
-    }
-    
+  //  console.log('is Authenticated',output.payload.token)
+    if (output.payload.status === 201){
+      // localStorage.setItem('token', output.payload.token)
+      history.push('/trip');
+    } 
   }
 const [emailError, setEmailError] = useState(null)
+useEffect(()=>{
+  localStorage.removeItem('token')
 
+}, [])
   useEffect(() => {
     if(props.user.error){
       setEmailError(props.user.error.message)
     }
-    
-    console.log('user changed', props.user);
+    // localStorage.removeItem('token')
+    // console.log('user changed', props.user);
 }, [props.user]) 
 
   return (
-    <div className="signup-form mr-5 bg-form">
+    <div className="signup-form mr-5 mt-4 bg-form">
       {/* <p className=""> {props.user.user ? `${props.user.user.data.firstName}, Welcome to devTransport` : 'Welcome'}</p> */}
   <p className="red"> { emailError ? 'Email already exist' : '' }</p>
       <form className="text-center border border-light p-3 shadow-lg " onSubmit={handleSubmit(onSubmit)}>
 
-        <p className="h4 mb-4">SIGN UP</p>
+        <p className="h4 mb-4 text-info">SIGN UP</p>
         <input ref={register({ required: 'First name is required' })} name="firstName" type="text" className="form-control mb-1" placeholder="First name..." />
         {errors.firstName && <p className="red mb-0 ">{errors.firstName.message}</p>}
         <input ref={register({ required: 'Last name is required' })} name="lastName" type="text" className="form-control mb-1" placeholder="Last name..." />
@@ -43,8 +47,8 @@ const [emailError, setEmailError] = useState(null)
 
         {errors.password && <p className="red mb-0">{errors.password.message}</p>}
 
-        <label>Status</label>
-        <select ref={register({ required: true })} name="status" className="browser-default custom-select mb-4">
+        <label className="float-left text-info">Status</label>
+        <select ref={register({ required: true })} name="status"  className="browser-default custom-select mb-4">
           <option disabled>Choose option</option>
           <option >Passenger</option>
           <option >Driver</option>
@@ -57,7 +61,7 @@ const [emailError, setEmailError] = useState(null)
   )
 }
 const MapStateToProps = ({user}) => {
-  // console.log(state.user)
+  // console.log('state________',user.isAuthenticated)
   return {
     user
   }
