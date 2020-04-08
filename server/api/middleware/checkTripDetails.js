@@ -1,38 +1,37 @@
 /* eslint-disable camelcase */
 // import Response from '../helpers/responsesHandler';
-import { Users, Trip } from '../db/models';
+import db from '../db/models';
 
 export default class TripDetails {
   static async findUserInToken(req, res, next) {
     const { userEmail } = req.payload;
-    const userIdFromToken = await Users.findOne({
+    const userIdFromToken = await db.Users.findOne({
       where: {
         email: userEmail,
       },
     });
-    const { user_id, status } = userIdFromToken;
-
-
-    if (!user_id) {
+    const { userId, status } = userIdFromToken;
+    // console.log('USER ID', userIdFromToken)
+    if (!userId) {
       return res.status(404).json({
         status: 404,
         error: 'You do not own this trip',
       });
     }
-    req.userDetails = user_id;
+    req.userDetails = userId;
     req.userStatus = status;
     return next();
   }
 
   static async findTrip(req, res, next) {
     const { tripId } = req.params;
-    const tripDetails = await Trip.findOne({
+    const tripDetails = await db.Trip.findOne({
       where: {
         tripId,
       },
     },
     {
-      attributes: ['user_id, tripId'],
+      attributes: ['userId, tripId'],
     });
     if (!tripDetails) {
       return res.status(404).json({
@@ -40,7 +39,7 @@ export default class TripDetails {
         error: 'Trip was not found',
       });
     }
-    const compareDetails = tripDetails.user_id === req.userDetails;
+    const compareDetails = tripDetails.userId === req.userDetails;
     if (!compareDetails) {
       return res.status(404).json({
         status: 404,

@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { Users } from '../db/models';
+import db from '../db/models';
 import cipher from '../helpers/cipher';
 import generateToken from '../helpers/generateToken';
 
@@ -13,14 +13,12 @@ class UserController {
         email,
         password,
         status,
-        busNo,
       } = req.body;
-
-      const existingEmail = await Users.findOne({
+      const existingEmail = await db.Users.findOne({
         where: {
           email,
         },
-      }, { attributes: ['user_id', 'first_name', 'last_name', 'email'] });
+      }, { attributes: ['userId', 'firstName', 'lastName', 'email'] });
 
       if (existingEmail) {
         return res.status(409).json({
@@ -31,18 +29,19 @@ class UserController {
 
       const userPassword = cipher.hashPassword(password);
 
-      const user = await Users.create({
-        user_id: uuid(),
-        first_name: firstName,
-        last_name: lastName,
+      const user = await db.Users.create({
+        userId: uuid(),
+        firstName,
+        lastName,
         email,
         password: userPassword,
         status,
-        bus_no: busNo,
       });
       delete user.dataValues.password;
+      const userToken = generateToken(email);
       return res.status(201).json({
         status: 201,
+        token: userToken,
         message: 'User has been created',
         data: user,
       });
@@ -61,7 +60,7 @@ class UserController {
         password,
       } = req.body;
 
-      const findEmail = await Users.findOne({
+      const findEmail = await db.Users.findOne({
         where: {
           email,
         },

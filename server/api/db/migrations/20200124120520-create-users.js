@@ -1,4 +1,3 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     id: {
@@ -7,13 +6,13 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    user_id: {
+    userId: {
       type: Sequelize.STRING,
     },
-    first_name: {
+    firstName: {
       type: Sequelize.STRING,
     },
-    last_name: {
+    lastName: {
       type: Sequelize.STRING,
     },
     email: {
@@ -23,9 +22,6 @@ module.exports = {
       type: Sequelize.STRING,
     },
     status: {
-      type: Sequelize.STRING,
-    },
-    bus_no: {
       type: Sequelize.STRING,
     },
     createdAt: {
