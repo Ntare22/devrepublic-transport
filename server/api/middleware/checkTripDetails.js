@@ -27,7 +27,7 @@ export default class TripDetails {
     const { tripId } = req.params;
     const tripDetails = await db.Trip.findOne({
       where: {
-        tripId,
+        tripId: tripId * 1,
       },
     },
     {
