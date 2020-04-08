@@ -1,0 +1,37 @@
+.signup-form{
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    margin: auto;
+    height: 100%;
+    /* border-radius: 5px; */
+    /* background: rgb(10, 120, 160); */
+}
+
+.bg{
+    background-image: url(./dev2.jpg);
+}
+
+.red{
+    color: red;
+}
+
+.bg-navbar {
+    background-color: #f7f7f7;
+} 
+
+.active {
+    background-color: #0bbfbc;
+}
+.bg{ 
+    background-color: #0bbfbc;
+}
+
+.custom-modal-style {
+    width: 500px;
+    height: 800px;
+}
+
+.margin-right{
+    margin-right: 70px;
+}
