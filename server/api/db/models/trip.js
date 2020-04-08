@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
     location: {
@@ -9,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       required: true,
     },
-    user_id: DataTypes.STRING,
+    userId: DataTypes.STRING,
     busToArrive: DataTypes.STRING,
     BusArrivalTime: DataTypes.STRING,
     tripId: {
@@ -20,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   Trip.associate = (models) => {
     // associations can be defined here
     Trip.belongsTo(models.Users, {
-      foreignKey: 'user_id',
-      // targetKey: 'user_id',
+      foreignKey: 'userId',
+      // targetKey: 'userId',
     });
   };
   return Trip;

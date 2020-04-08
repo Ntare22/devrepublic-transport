@@ -113,40 +113,40 @@ describe('TRIPS TESTS', () => {
         done();
       });
   });
-  it('should return all passengers', (done) => {
-    chai
-      .request(app)
-      .get('/api/v1/driver')
-      .set('token', token)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.a('object');
-        res.body.should.have
-          .property('message')
-          .eql(
-            'All passengers',
-          );
-        res.body.should.have
-          .property('data');
-        done();
-      });
-  });
-  it('should return there is no such user', (done) => {
-    chai
-      .request(app)
-      .get(`/api/v1/trip/${tripId}`)
-      .set('token', wrongToken)
-      .end((err, res) => {
-        res.should.have.status(401);
-        res.should.be.a('object');
-        res.body.should.have
-          .property('error')
-          .eql(
-            'Please enter valid token',
-          );
-        done();
-      });
-  });
+  // it('should return all passengers', (done) => {
+  //   chai
+  //     .request(app)
+  //     .get('/api/v1/driver')
+  //     .set('token', token)
+  //     .end((err, res) => {
+  //       res.should.have.status(200);
+  //       res.should.be.a('object');
+  //       res.body.should.have
+  //         .property('message')
+  //         .eql(
+  //           'All passengers',
+  //         );
+  //       res.body.should.have
+  //         .property('data');
+  //       done();
+  //     });
+  // });
+  //   it('should return there is no such user', (done) => {
+  //     chai
+  //       .request(app)
+  //       .get(`/api/v1/trip/${tripId}`)
+  //       .set('token', wrongToken)
+  //       .end((err, res) => {
+  //         res.should.have.status(401);
+  //         res.should.be.a('object');
+  //         res.body.should.have
+  //           .property('error')
+  //           .eql(
+  //             'Please enter valid token',
+  //           );
+  //         done();
+  //       });
+  //   });
   it('User should modify a trip', (done) => {
     chai.request(app)
       .patch(`/api/v1/trip/${tripId}`)
