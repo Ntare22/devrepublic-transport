@@ -27,6 +27,7 @@ export default class TripController {
       const tripExist = await Trip.findOne({
         where: {
           userId,
+          destination,
         },
       });
       if (tripExist) {
@@ -148,6 +149,26 @@ export default class TripController {
       return res.status(201).json({ status: 201, message: 'Trip modified successfully', trip });
     } catch (error) {
       return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async viewAll(req, res) {
+    try {
+      const trip = await Trip.findAll({
+        where: {
+          userId: req.userDetails,
+        },
+      });
+      return res.status(200).json({
+        status: 200,
+        message: 'All Trips Details',
+        data: trip,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: error.message,
+      });
     }
   }
 }
