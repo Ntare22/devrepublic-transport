@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/Ntare22/devrepublic-transport#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
